@@ -8,8 +8,12 @@ let computerScore = 0;
 mainGame();
 
 function mainGame() {
+	alert(`
+		Your Score:${userScore} Computer Score:${computerScore}			 
+		Computer Choice:${computerPlay}
+		`);
 	if (isThereWinner) {
-		console.log(winner);
+		alert(winner);
 	} else {
 		while (!verifyUserInput()) {
 			askValueToUser();
@@ -53,7 +57,7 @@ function assignRandomPlayToComputer() {
 // To check who won and increase score
 function checkWhoWonAndUpdateScore() {
 	if (userPlay === computerPlay) {
-		mainGame();
+		checkIfWinnerExists();
 	} else if (userPlay === "R" && computerPlay === "P") {
 		computerScore++;
 	} else if (userPlay === "R" && computerPlay === "S") {
@@ -75,9 +79,13 @@ function checkWhoWonAndUpdateScore() {
 function checkIfWinnerExists() {
 	if (userScore === 5) {
 		isThereWinner = true;
+		userScore = 0;
+		computerScore = 0;
 		winner = "You Won!";
 	} else if (computerScore === 5) {
 		isThereWinner = true;
+		userScore = 0;
+		computerScore = 0;
 		winner = "Computer Won!";
 	} else {
 		isThereWinner = false;
