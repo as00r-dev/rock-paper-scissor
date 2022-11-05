@@ -13,7 +13,6 @@ function mainGame() {
 	} else {
 		while (!verifyUserInput()) {
 			askValueToUser();
-			console.log(userPlay);
 		}
 		assignRandomPlayToComputer();
 		checkWhoWonAndUpdateScore();
@@ -51,8 +50,37 @@ function assignRandomPlayToComputer() {
 	}
 }
 
+// To check who won and increase score
 function checkWhoWonAndUpdateScore() {
 	if (userPlay === computerPlay) {
 		mainGame();
+	} else if (userPlay === "R" && computerPlay === "P") {
+		computerScore++;
+	} else if (userPlay === "R" && computerPlay === "S") {
+		userScore++;
+	} else if (userPlay === "P" && computerPlay === "R") {
+		userScore++;
+	} else if (userPlay === "P" && computerPlay === "S") {
+		computerScore++;
+	} else if (userPlay === "S" && computerPlay === "R") {
+		computerScore++;
+	} else if (userPlay === "S" && computerPlay === "P") {
+		userScore++;
 	}
+	userPlay = null;
+	checkIfWinnerExists();
+}
+
+// Declare Winner, if there is one
+function checkIfWinnerExists() {
+	if (userScore === 5) {
+		isThereWinner = true;
+		winner = "You Won!";
+	} else if (computerScore === 5) {
+		isThereWinner = true;
+		winner = "Computer Won!";
+	} else {
+		isThereWinner = false;
+	}
+	mainGame();
 }
